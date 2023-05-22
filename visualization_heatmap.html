@@ -81,7 +81,7 @@
       overflow: hidden;
     }
 
-    .tab button {
+    .tab button,.nav {
       background-color: #f2f2f2;
       border: none;
       color: black;
@@ -90,11 +90,11 @@
       float: left;
     }
 
-    .tab button:hover {
+    .tab button:hover,.nav:hover {
       background-color: #ddd;
     }
 
-    .tab button.active {
+    .tab button.active,.nav.active {
       background-color: #ccc;
     }
 
@@ -108,6 +108,9 @@
 </head>
 
 <body>
+    <h3>Heatmap</h3>
+    <a href="visualization_normalized_heatmap.html" class="nav">view normalized heatmap</a>
+    <p> &nbsp;</p>
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Tab1')">True positive</button>
         <button class="tablinks" onclick="openTab(event, 'Tab2')">False negative</button>
