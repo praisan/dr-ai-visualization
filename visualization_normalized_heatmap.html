@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery img {
+            width: 300px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .info {
+            width: 200px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 32px;
+            top: 32px;
+            width: 32px;
+            height: 32px;
+            opacity: 0.5;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .close:before,
+        .close:after {
+            position: absolute;
+            left: 15px;
+            content: ' ';
+            height: 33px;
+            width: 2px;
+            background-color: #fff;
+        }
+
+        .close:before {
+            transform: rotate(45deg);
+        }
+
+        .close:after {
+            transform: rotate(-45deg);
+        }
+
+        /* CSS styles for the tab navigation */
+        .tab {
+            overflow: hidden;
+        }
+
+        .tab button {
+            background-color: #f2f2f2;
+            border: none;
+            color: black;
+            padding: 8px 16px;
+            cursor: pointer;
+            float: left;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* CSS styles for the tab content */
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Tab1')">True positive</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab2')">False negative</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab3')">False positive</button>
+    </div>
+    <!-- Tab1 True positive-->
+    <div id="Tab1" class="tabcontent">
+        <h3>Class 2-4 that are predicted as transfer</h3>
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11026_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9802 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.1808</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/11026_left_nor_contour.jpg" onclick="openModal('images/2/11026_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/11026_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/11026_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/11026_left_nor_heatmap.jpg" onclick="openModal('images/2/11026_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14510_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9795 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.1287</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/14510_left_nor_contour.jpg" onclick="openModal('images/2/14510_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/14510_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/14510_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/14510_left_nor_heatmap.jpg" onclick="openModal('images/2/14510_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>1204_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9313 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0063</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/1204_right_nor_contour.jpg" onclick="openModal('images/2/1204_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/1204_right_nor_addWeighted.jpg"
+                onclick="openModal('images/2/1204_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/1204_right_nor_heatmap.jpg" onclick="openModal('images/2/1204_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12525_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9177 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0112</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/12525_left_nor_contour.jpg" onclick="openModal('images/2/12525_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/12525_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/12525_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/12525_left_nor_heatmap.jpg" onclick="openModal('images/2/12525_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12480_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.8781 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0258</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/12480_left_nor_contour.jpg" onclick="openModal('images/2/12480_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/12480_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/12480_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/12480_left_nor_heatmap.jpg" onclick="openModal('images/2/12480_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13015_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.8304 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.2099</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/13015_right_nor_contour.jpg" onclick="openModal('images/2/13015_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/13015_right_nor_addWeighted.jpg"
+                onclick="openModal('images/2/13015_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/13015_right_nor_heatmap.jpg" onclick="openModal('images/2/13015_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11847_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.8071 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0755</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/11847_left_nor_contour.jpg" onclick="openModal('images/2/11847_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/11847_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/11847_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/11847_left_nor_heatmap.jpg" onclick="openModal('images/2/11847_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>10513_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.6748 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.1598</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/10513_left_nor_contour.jpg" onclick="openModal('images/2/10513_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/10513_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/10513_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/10513_left_nor_heatmap.jpg" onclick="openModal('images/2/10513_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12881_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9924 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.1489</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/12881_right_nor_contour.jpg" onclick="openModal('images/3/12881_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/12881_right_nor_addWeighted.jpg"
+                onclick="openModal('images/3/12881_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/12881_right_nor_heatmap.jpg" onclick="openModal('images/3/12881_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12149_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9923 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.1230</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/12149_left_nor_contour.jpg" onclick="openModal('images/3/12149_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/12149_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/12149_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/12149_left_nor_heatmap.jpg" onclick="openModal('images/3/12149_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13716_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9905 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0330</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/13716_left_nor_contour.jpg" onclick="openModal('images/3/13716_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/13716_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/13716_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/13716_left_nor_heatmap.jpg" onclick="openModal('images/3/13716_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14020_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9893 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0046</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/14020_left_nor_contour.jpg" onclick="openModal('images/3/14020_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/14020_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/14020_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/14020_left_nor_heatmap.jpg" onclick="openModal('images/3/14020_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14466_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9877 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0118</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/14466_right_nor_contour.jpg" onclick="openModal('images/3/14466_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/14466_right_nor_addWeighted.jpg"
+                onclick="openModal('images/3/14466_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/14466_right_nor_heatmap.jpg" onclick="openModal('images/3/14466_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11871_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9841 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0742</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/11871_left_nor_contour.jpg" onclick="openModal('images/3/11871_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/11871_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/11871_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/11871_left_nor_heatmap.jpg" onclick="openModal('images/3/11871_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11546_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9790 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0079</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/11546_right_nor_contour.jpg" onclick="openModal('images/3/11546_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/11546_right_nor_addWeighted.jpg"
+                onclick="openModal('images/3/11546_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/11546_right_nor_heatmap.jpg" onclick="openModal('images/3/11546_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11031_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9521 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0069</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/11031_left_nor_contour.jpg" onclick="openModal('images/3/11031_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/11031_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/11031_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/11031_left_nor_heatmap.jpg" onclick="openModal('images/3/11031_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12995_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9376 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0429</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/12995_right_nor_contour.jpg" onclick="openModal('images/3/12995_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/12995_right_nor_addWeighted.jpg"
+                onclick="openModal('images/3/12995_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/12995_right_nor_heatmap.jpg" onclick="openModal('images/3/12995_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11590_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9296 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0182</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/11590_left_nor_contour.jpg" onclick="openModal('images/3/11590_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/11590_left_nor_addWeighted.jpg"
+                onclick="openModal('images/3/11590_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/11590_left_nor_heatmap.jpg" onclick="openModal('images/3/11590_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14109_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.8912 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0038</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/3/14109_right_nor_contour.jpg" onclick="openModal('images/3/14109_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/3/14109_right_nor_addWeighted.jpg"
+                onclick="openModal('images/3/14109_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/3/14109_right_nor_heatmap.jpg" onclick="openModal('images/3/14109_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12995_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9929 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4135</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/12995_left_nor_contour.jpg" onclick="openModal('images/4/12995_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/12995_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/12995_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/12995_left_nor_heatmap.jpg" onclick="openModal('images/4/12995_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11032_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9906 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0419</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/11032_left_nor_contour.jpg" onclick="openModal('images/4/11032_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/11032_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/11032_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/11032_left_nor_heatmap.jpg" onclick="openModal('images/4/11032_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13811_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9906 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4564</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/13811_right_nor_contour.jpg" onclick="openModal('images/4/13811_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/13811_right_nor_addWeighted.jpg"
+                onclick="openModal('images/4/13811_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/13811_right_nor_heatmap.jpg" onclick="openModal('images/4/13811_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11896_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9902 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0114</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/11896_right_nor_contour.jpg" onclick="openModal('images/4/11896_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/11896_right_nor_addWeighted.jpg"
+                onclick="openModal('images/4/11896_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/11896_right_nor_heatmap.jpg" onclick="openModal('images/4/11896_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13811_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9902 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4522</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/13811_left_nor_contour.jpg" onclick="openModal('images/4/13811_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/13811_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/13811_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/13811_left_nor_heatmap.jpg" onclick="openModal('images/4/13811_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14844_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9897 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0191</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/14844_right_nor_contour.jpg" onclick="openModal('images/4/14844_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/14844_right_nor_addWeighted.jpg"
+                onclick="openModal('images/4/14844_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/14844_right_nor_heatmap.jpg" onclick="openModal('images/4/14844_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>10954_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9895 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4226</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/10954_left_nor_contour.jpg" onclick="openModal('images/4/10954_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/10954_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/10954_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/10954_left_nor_heatmap.jpg" onclick="openModal('images/4/10954_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>10653_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9734 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4250</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/10653_left_nor_contour.jpg" onclick="openModal('images/4/10653_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/10653_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/10653_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/10653_left_nor_heatmap.jpg" onclick="openModal('images/4/10653_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>14849_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9478 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.3757</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/14849_left_nor_contour.jpg" onclick="openModal('images/4/14849_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/14849_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/14849_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/14849_left_nor_heatmap.jpg" onclick="openModal('images/4/14849_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13066_right</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.9236 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0062</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/13066_right_nor_contour.jpg" onclick="openModal('images/4/13066_right_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/13066_right_nor_addWeighted.jpg"
+                onclick="openModal('images/4/13066_right_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/13066_right_nor_heatmap.jpg" onclick="openModal('images/4/13066_right_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>10904_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.7470 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.2371</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/4/10904_left_nor_contour.jpg" onclick="openModal('images/4/10904_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/4/10904_left_nor_addWeighted.jpg"
+                onclick="openModal('images/4/10904_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/4/10904_left_nor_heatmap.jpg" onclick="openModal('images/4/10904_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+    </div>
+    <!-- Tab2 False negative-->
+    <div id="Tab2" class="tabcontent">
+        <h3>Class 2-4 that are predicted as no transfer needed</h3>
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12630_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.2264 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4393</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/12630_left_nor_contour.jpg" onclick="openModal('images/2/12630_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/12630_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/12630_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/12630_left_nor_heatmap.jpg" onclick="openModal('images/2/12630_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>13638_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.1099 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.0308</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/13638_left_nor_contour.jpg" onclick="openModal('images/2/13638_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/13638_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/13638_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/13638_left_nor_heatmap.jpg" onclick="openModal('images/2/13638_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+
+
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>11790_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.1041 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.2007</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/2/11790_left_nor_contour.jpg" onclick="openModal('images/2/11790_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/2/11790_left_nor_addWeighted.jpg"
+                onclick="openModal('images/2/11790_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/2/11790_left_nor_heatmap.jpg" onclick="openModal('images/2/11790_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+    </div>
+    <!-- Tab1 True positive-->
+    <div id="Tab3" class="tabcontent">
+        <h3>Class 0-1 that are predicted as transfer</h3>
+        <div class="gallery">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>Filename</td>
+                        <td>12396_left</td>
+                    </tr>
+                    <tr>
+                        <td>Level</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Transfer confident</td>
+                        <td>0.5950 </td>
+                    </tr>
+                    <tr>
+                        <td>Bad image confident</td>
+                        <td>0.4202</td>
+                    </tr>
+                </table>
+            </div>
+            <img src="images/0/12396_left_nor_contour.jpg" onclick="openModal('images/0/12396_left_nor_contour.jpg')"
+                alt="Image" title="normalized contour">
+            <img src="images/0/12396_left_nor_addWeighted.jpg"
+                onclick="openModal('images/0/12396_left_nor_addWeighted.jpg')" alt="Image" title="add masked heatmap">
+            <img src="images/0/12396_left_nor_heatmap.jpg" onclick="openModal('images/0/12396_left_nor_heatmap.jpg')"
+                alt="Image" title="normalized heatmap">
+        </div>
+    </div>
+
+
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()"></span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <script>
+
+            function closeModal() {
+                var modal = document.getElementById('myModal');
+                modal.style.display = 'none';
+            }
+            function openModal(imagePath) {
+                var modal = document.getElementById('myModal');
+                var modalImage = document.getElementById('modalImage');
+
+                // Reset the zoom level and position
+                var zoomLevel = 100;
+                var isDragging = false;
+                var startDragX = 0;
+                var startDragY = 0;
+                var startPosX = 0;
+                var startPosY = 0;
+
+                modal.style.display = 'block';
+                modalImage.src = imagePath;
+
+                // Enable zooming functionality
+                modalImage.style.transform = 'scale(1)';
+                modalImage.addEventListener('wheel', zoomImage);
+                modalImage.addEventListener('mousedown', startDrag);
+                modalImage.addEventListener('mousemove', dragImage);
+                modalImage.addEventListener('mouseup', endDrag);
+                modalImage.addEventListener('mouseleave', endDrag);
+
+
+                function zoomImage(event) {
+                    event.preventDefault();
+
+                    // Calculate the mouse position relative to the image
+                    var mouseX = event.clientX - modalImage.getBoundingClientRect().left;
+                    var mouseY = event.clientY - modalImage.getBoundingClientRect().top;
+
+                    // Increase or decrease the zoom level based on the scroll direction
+                    var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+                    var zoomFactor = 1 + delta * 0.1;
+                    var newZoomLevel = zoomLevel * zoomFactor;
+                    newZoomLevel = Math.max(50, Math.min(200, newZoomLevel)); // Limit the zoom level between 50% and 200%
+
+                    // Calculate the position adjustments to keep the mouse position fixed during zoom
+                    var deltaX = (modalImage.offsetWidth * (zoomLevel - newZoomLevel) * mouseX) / (modalImage.offsetWidth * zoomLevel);
+                    var deltaY = (modalImage.offsetHeight * (zoomLevel - newZoomLevel) * mouseY) / (modalImage.offsetHeight * zoomLevel);
+
+                    // Apply the zoom transformation and position adjustments
+                    modalImage.style.transformOrigin = mouseX + 'px ' + mouseY + 'px';
+                    modalImage.style.transform = 'scale(' + (newZoomLevel / 100) + ') translate(' + deltaX + 'px, ' + deltaY + 'px)';
+
+                    zoomLevel = newZoomLevel;
+                }
+                function startDrag(event) {
+                    event.preventDefault();
+                    isDragging = true;
+                    startDragX = event.clientX;
+                    startDragY = event.clientY;
+                    startPosX = modalImage.offsetLeft;
+                    startPosY = modalImage.offsetTop;
+                    // modalImage.addEventListener('mousemove', dragImage);
+                }
+                function dragImage(event) {
+                    event.preventDefault();
+
+                    if (isDragging) {
+                        var deltaX = event.clientX - startDragX;
+                        var deltaY = event.clientY - startDragY;
+
+                        // Apply the pan transformation with consideration of the current zoom level
+                        var newPosX = startPosX + deltaX / (zoomLevel / 100);
+                        var newPosY = startPosY + deltaY / (zoomLevel / 100);
+
+                        modalImage.style.transform = 'scale(' + (zoomLevel / 100) + ') translate(' + newPosX + 'px, ' + newPosY + 'px)';
+                    }
+                }
+                function endDrag(event) {
+                    event.preventDefault();
+                    isDragging = false;
+                    // modalImage.removeEventListener('mousemove', dragImage);
+                }
+
+
+            }
+
+            // Function to open a specific tab
+            function openTab(event, tabName) {
+                var i, tabcontent, tablinks;
+
+                // Hide all tab content
+                tabcontent = document.getElementsByClassName('tabcontent');
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = 'none';
+                }
+
+                // Remove 'active' class from all tab links
+                tablinks = document.getElementsByClassName('tablinks');
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(' active', '');
+                }
+
+                // Show the selected tab content
+                document.getElementById(tabName).style.display = 'block';
+
+                // Add 'active' class to the clicked tab link
+                event.currentTarget.className += ' active';
+            }
+            // Set Tab 1 as the default tab
+            document.getElementById('Tab1').style.display = 'block';
+            document.getElementsByClassName('tablinks')[0].className += ' active';
+        </script>
+</body>
+
+</html>
